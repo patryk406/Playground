@@ -2,6 +2,7 @@
 import { computed, onBeforeUnmount, ref } from "vue";
 
 const words = ["application", "programming", "interface", "wizard"];
+const keyboard = [['q','w','e','r','t','y','u','i','o','p'],['a','s','d','f','g','h','j','k','l'],['z','x','c','v','b','n','m']]
 const finalMessage = ref("");
 let selectedWord = words[Math.floor(Math.random() * words.length)];
 const playable = ref(true);
@@ -193,6 +194,13 @@ flex-col bg-gray-200 p-10 rounded-2xl border border-4 border-white">
     >
       <p>You have already entered this letter</p>
     </div>
+    <div class="keyboard_container flex flex-col items-center justify-center mt-2">
+    <div class="keyboard flex" v-for="(row, rowKey) in keyboard" :key="rowKey">
+      <span class="letter p-3 m-1 bg-black flex text-white border border-amber-100 rounded-xl font-bold"
+            v-for="(letter, letterKey) in row" :key="letterKey"
+@click="handleKeyDown({key:letter, keyCode:65})"
+>{{letter}}</span>
+    </div></div>
   </main>
 </template>
 <style>
