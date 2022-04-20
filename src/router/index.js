@@ -18,6 +18,10 @@ const router = createRouter({
       path: "/hangman",
       name: "HangMan",
       component: () => import("../views/HangMan.vue"),
+    },    {
+      path: "/sudoku",
+      name: "Sudoku",
+      component: () => import("../views/SudokuGame.vue"),
     },
   ],
 });

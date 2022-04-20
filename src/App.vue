@@ -8,6 +8,7 @@ import { RouterLink, RouterView } from 'vue-router'
         <RouterLink class="mr-5 mb-5 p-5 w-52 text-center font-bold uppercase border-2 border-gray-100 bg-gray-200 rounded hover:bg-gray-400" to="/">Home</RouterLink>
         <RouterLink class="mr-5 mb-5 p-5 w-52 text-center font-bold uppercase border-2 border-gray-100 bg-gray-200 rounded hover:bg-gray-400" to="/tictactoe">Tic Tac Toe Game</RouterLink>
         <RouterLink class="mr-5 mb-5 p-5 w-52 text-center font-bold uppercase border-2 border-gray-100 bg-gray-200 rounded hover:bg-gray-400" to="/hangman">Hang Man Game</RouterLink>
+        <RouterLink class="mr-5 mb-5 p-5 w-52 text-center font-bold uppercase border-2 border-gray-100 bg-gray-200 rounded hover:bg-gray-400" to="/sudoku">Sudoku Game</RouterLink>
       </nav>
   </header>
 
