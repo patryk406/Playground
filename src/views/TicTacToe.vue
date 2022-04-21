@@ -2,7 +2,11 @@
 import { computed, ref } from "vue";
 
 const player = ref("X");
-const board = ref([["", "", ""], ["", "", ""], ["", "", ""]]);
+const board = ref([
+  ["", "", ""],
+  ["", "", ""],
+  ["", "", ""],
+]);
 const CalculateWinner = (squares) => {
   const lines = [
     [0, 1, 2],
@@ -35,32 +39,96 @@ const MakeMove = (x, y) => {
 
 const ResetGame = () => {
   player.value = "X";
-  board.value = [["", "", ""], ["", "", ""], ["", "", ""]];
+  board.value = [
+    ["", "", ""],
+    ["", "", ""],
+    ["", "", ""],
+  ];
 };
 </script>
 
 <template>
-  <main class="pt-8 text-center min-h-screen">
-    <h1 class="mb8 text-3xl font-bold uppercase">Tic Tac Toe</h1>
-    <h3 class="text-xl mb-4">Player {{ player }}'s turn</h3>
+  <main class="x_o_game">
+    <h1 class="game_name">Tic Tac Toe</h1>
+    <h3 class="subtitle">Player {{ player }}'s turn</h3>
 
-    <div class="flex flex-col items-center mb-8">
-      <div v-for="(row, x) in board" :key="x" class="flex">
+    <div class="board_container">
+      <div v-for="(row, x) in board" :key="x" class="row_container">
         <div
-          v-for="(cell,y) in row"
+          v-for="(cell, y) in row"
           :key="y"
           @click="MakeMove(x, y)"
-          :class="`border border-dark w-20 h-20 hover:bg-gray-400
-           flex items-center justify-center material-icons-outlined
-            text-4xl cursor-pointer ${cell ==='X' ? 'text-pink-500' : 'text-blue-500'}`"
-        >{{cell ==='X' ? 'close' : cell==='O' ? 'circle':''}}</div>
+          :class="`col_container ${cell === 'X' ? 'col_x' : 'col_o'}`"
+        >
+          {{ cell === "X" ? "x" : cell === "O" ? "⌾" : "" }}
+        </div>
       </div>
     </div>
-    <h2 v-if="winner" class="text-6xl font-bold mb-8">
-      Player '{{winner}}' wins!
-    </h2>
-    <button @click="ResetGame" class="px-4 py-2 bg-pink-500 rounded uppercase font-bold hover:bg-pink-600">Reset Game</button>
+    <h2 v-if="winner" class="winner_text">Player '{{ winner }}' wins!</h2>
+    <button
+      @click="ResetGame"
+      class="reset_game px-4 py-2 bg-pink-500 rounded uppercase font-bold hover:bg-pink-600"
+    >
+      Reset Game
+    </button>
   </main>
 </template>
 
-<style scoped></style>
+<style scoped lang="scss">
+.x_o_game {
+  min-height: 100vh;
+  text-align: center;
+  .game_name {
+    font-size: 32px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .subtitle {
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+  .board_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 14px;
+    .row_container {
+      display: flex;
+      .col_container {
+        display: flex;
+        align-content: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 52px;
+        border: 1px solid black;
+        width: 70px;
+        height: 70px;
+        &.col_x {
+          color: pink;
+        }
+        &.col_o {
+          color: dodgerblue;
+        }
+      }
+    }
+  }
+  .winner_text {
+    font-size: 52px;
+    font-weight: bold;
+    margin-top: 20px;
+  }
+  .reset_game {
+    font-size: 24px;
+    padding: 5px;
+    border: white;
+    background-color: #7a2626;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    &:hover {
+      background-color: #6c1010;
+    }
+  }
+}
+</style>
